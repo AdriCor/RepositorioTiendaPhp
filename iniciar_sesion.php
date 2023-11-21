@@ -17,7 +17,7 @@
 
         //$contrasena_cifrada = password_hash($contrasena, PASSWORD_DEFAULT);
 
-        $sql = "SELECT * FROM usuarios WHERE usuarios= '$usuario'";
+        $sql = "SELECT * FROM usuarios WHERE usuario= '$usuario'";
         $resultado = $conexion->query($sql);
 
         if ($resultado->num_rows === 0) {

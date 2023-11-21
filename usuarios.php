@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuarios</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <?php require "depurar.php"?>
     <?php require "conexion.php"?>
 </head>
@@ -71,33 +72,39 @@ $edad = "";
             }
         }
     }
-    $sql = "INSERT INTO usuarios (usuario, contraseña, fecha_nacimiento) VALUES ('$usuario', '$contrasena', '$edad')";
-    $conexion -> query($sql);
+    
 
     
     ?>
+    <div class="container">
     <h2>Registrarse</h2>
     <form action="cesta.php" method="post"> <!-- preguntar si es correcto e laction -->
         <!-- 4-12 char,acepta de a-z en min y mayusc, ñ, acentos y _ -->
-        <label >Nombre de Ususario: </label>
-        <input type="text" name="nameUsu"></input>
+        <label class="form-label" >Nombre de Usuario: </label>
+        <input class="form-control" type="text" name="nameUsu"></input>
         <?php if (isset($err_usu)) echo $err_usu; ?>
         <br><br>
         <!-- maximo 255 char -->
-        <label id="contrasena"> Contraseña:</label>
-        <input type="text" name="contrasena"></input>
+        <label class="form-label" id="contrasena"> Contraseña:</label>
+        <input class="form-control" type="text" name="contrasena"></input>
         <?php if (isset($err_pass)) echo $err_pass; ?>
         <br><br>
-        <label id="edad"> Fecha de nacimiento:</label>
-        <input type="date" name="edad"></input>
+        <label class="form-label" id="edad"> Fecha de nacimiento:</label>
+        <input class="form-control" type="date" name="edad"></input>
         <?php if (isset($err_edad)) echo $err_edad; ?>
         <br><br>
         <input type="hidden" name="formulario" value="insertar">
 <!--Queda que cuando se inserte el usuario correctamente se cree una cesta con un precio total de 0, por ahora.-->
-        <input type="submit"  name="creacionCesta" value="Insertar usuario">
+<input class="btn btn-primary" type="submit" value="Registrarse">
     </form>
-
-
+     <?php
+     if(isset($usuario) && isset($contrasena) && isset($edad)) {
+        $sql = "INSERT INTO usuarios (usuario, contraseña, fecha_nacimiento) VALUES ('$usuario', '$contrasena', '$edad')";
+        $conexion -> query($sql);
+     }
+     ?>
+     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 
 </html>

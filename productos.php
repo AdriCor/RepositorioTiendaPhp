@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Productos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <?php require "depurar.php" ?>
     <?php require "conexion.php"?>
 </head>
@@ -53,6 +54,7 @@ $quantity = "";
                     $err_price = "*EL precio solo admite cantidades numéricas";
                 } else {
                     $price = $_POST["price"];
+                    $price = (float)$price;
                 }
             }
         }
@@ -90,39 +92,46 @@ $quantity = "";
         }
     }
 
-    //aqui podria meter un if isset para comorobar que se haga una vez está todo declarado correctamente
-    $sql = "INSERT INTO Productos (nombre_producto, Precio, Descripción, Cantidad) VALUES ('$name', '$price', '$descript', '$quantity')";
-    $conexion -> query($sql);
+    
 
     ?>
-    <h2>Formulario de los productos</h2>
+    <div class="container">
+    <h2>Insertar productos</h2>
     <form action="" method="post">
         <!-- maximo 40 char,acepta de a-z en min y mayusc, ñ y acentos -->
-        <label for="nameProduct">Nombre del Producto: </label>
-        <input type="text" name="name"></input>
+        <label class="form-label" for="nameProduct">Nombre del Producto: </label>
+        <input class="form-control" type="text" name="name"></input>
         <?php if (isset($err_name)) echo $err_name; ?>
         <br><br>
         <!-- entre 1 y 9 -->
-        <label for="price">Precio del Producto: </label>
-        <input type="text" name="price"></input>
+        <label class="form-label" for="price">Precio del Producto: </label>
+        <input class="form-control" type="number" name="price"></input>
         <?php if (isset($err_price)) echo $err_price; ?>
         <br><br>
         <!-- maximo 255 char -->
-        <label id="description"> Descripción del producto:</label>
-        <input type="text" name="description"></input>
+        <label class="form-label" id="description"> Descripción del producto:</label>
+        <input class="form-control" type="text" name="description"></input>
         <?php if (isset($err_descrip)) echo $err_descrip; ?>
         <br><br>
         <!-- entre 0 y 9 -->
-        <label id="Quantity"> Cantidades del Producto:</label>
-        <input type="text" name="quantity"></input>
+        <label class="form-label" id="Quantity"> Cantidades del Producto:</label>
+        <input class="form-control" type="text" name="quantity"></input>
         <?php if (isset($err_quantity)) echo $err_quantity; ?>
         <br><br>
         <input type="hidden" name="formulario" value="insertar">
-        <input type="submit" value="Insertar producto">
+        <input class="btn btn-primary" type="submit" value="Insertar producto">
     </form>
+    </div>
+    <?php
+     if(isset($name) && isset($price) && isset($descript) && isset($quantity)){
+        //aqui meto un if isset para comorobar que se haga una vez está todo declarado correctamente
+    $sql = "INSERT INTO Productos (nombre_producto, Precio, Descripción, Cantidad) VALUES ('$name', '$price', '$descript', '$quantity')";
+    $conexion -> query($sql);
+     }
+     ?>
 
 
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 
 </html>
