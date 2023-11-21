@@ -89,6 +89,8 @@ $quantity = "";
             }
         }
     }
+
+    //aqui podria meter un if isset para comorobar que se haga una vez está todo declarado correctamente
     $sql = "INSERT INTO Productos (nombre_producto, Precio, Descripción, Cantidad) VALUES ('$name', '$price', '$descript', '$quantity')";
     $conexion -> query($sql);
 

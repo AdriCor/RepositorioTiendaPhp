@@ -20,11 +20,29 @@
     }
     ?>
     <table>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Descripción</th>
+            <th>Cantidad</th>
+        </tr>
+        </thead>
+        <tbody>
         <?php
-        for ($i=0; $i < ; $i++) { 
-            # code...
+        foreach ($Productos as => $producto) {?>
+            <tr>
+                <td><?php echo $producto ->?></td>
+            </tr>
+            
+
+        <?php
         }
         ?>
+        </tbody>
+        
     </table>
 
 
