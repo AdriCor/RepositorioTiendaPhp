@@ -3,7 +3,6 @@
 // FOREIGN KEY (usuario) REFERENCES usuarios(usuario),  --De esto no tengo ni pajolera ahora, escribiendo esto, preguntar--,
 // precioTotal NUMERIC(7,2) NOT NULL 
 class Producto{
-    public $ID="SELECT id_producto FROM productos WHERE nombre_producto='$NombreProd'";
     public $NombreProd;
     public $Precio;
     public $Descripcion;
@@ -15,12 +14,7 @@ class Producto{
         $this->$Cantidad = $Cantidad;
     }
 
-    public function setID($ID) {
-        $this->ID = $ID;
-    }
-    public function getID($ID) {
-        return $this->ID ;
-    }
+    
     public function setNombreProd($NombreProd) {
         $this->NombreProd = $NombreProd;
     }

@@ -24,10 +24,10 @@
 <nav class="navbar navbar-light bg-light">
   <a class="navbar-brand" href="principal.php">Lista de productos</a>
   <a class="navbar-brand" href="iniciar_sesion.php">Iniciar sesión</a>
-  <a class="navbar-brand" href="#">Mi cesta</a>
+  <a class="navbar-brand" href="Micesta.php">Mi cesta</a>
 </nav>
     <div class="container">
-        <h1>Bienvenid@ <?php echo $usuario ?></h1>  <!-- mirar como meter aquí el usuario -->
+        <h1>Mi cesta</h1>  <!-- mirar como meter aquí el usuario -->
     </div>
 
     <div>
@@ -43,25 +43,7 @@
                 </tr>
             </thead>
             <tbody>
-                <?php
-                $sql = "SELECT * FROM Productos";
-                $resultado = $conexion -> query($sql);
-
-                while($fila = $resultado -> fetch_assoc()) {
-                    echo "<tr>";
-                    echo "<td>" . $fila['id_producto'] . "</td>";
-                    echo "<td>" . $fila['nombre_producto'] . "</td>";
-                    echo "<td>" . $fila['Precio'] . "</td>";
-                    echo "<td>" . $fila['Descripción'] . "</td>";
-                    echo "<td>" . $fila['Cantidad'] . "</td>";
-                    echo "<td>"; 
-                    ?>
-                    <img witdh="50" height="100" src="<?php echo $fila["imagen"] ?>">
-                    <?php 
-                    echo "</td>";
-                    echo "</tr>";
-                }
-                ?>
+                
             </tbody>
         </table>
         <a href="cerrarSesion.php">Cerrar sesión</a>
