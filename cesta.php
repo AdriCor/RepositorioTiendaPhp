@@ -2,6 +2,8 @@
 //     usuario VARCHAR (12) NOT NULL ,
 // FOREIGN KEY (usuario) REFERENCES usuarios(usuario),  --De esto no tengo ni pajolera ahora, escribiendo esto, preguntar--,
 // precioTotal NUMERIC(7,2) NOT NULL 
+
+// ESTA MAL; NO ES U NOBJETO
 class Cesta{
     public $usuario;
     public $precio;

@@ -6,10 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuarios</title>
     <?php require "depurar.php"?>
+    <?php require "conexion.php"?>
 </head>
 
 <body>
     <?php
+
+$usuario = "";
+$contrasena = "";
+$edad = "";
     if (
         $_SERVER["REQUEST_METHOD"] == "POST" &&
         $_POST["formulario"] == "insertar" //condicion para que cuando se pulse el boton con de insertar haga todas las validaciones siguientes
@@ -17,7 +22,7 @@
         // Con esto marco que me es necesario de ese archivo en esta funcion en concreto 
 
         $temp_usu = depurar($_POST["nameUsu"]);
-        $temp_pass= depurar($_POST["contraseña"]);
+        $temp_pass= depurar($_POST["contrasena"]);
         $temp_edad=depurar($_POST["edad"]);
 
 
@@ -35,7 +40,7 @@
         }
 
         //Valido la contraseña
-        if (strlen($_POST["contraseña"]) ==0) {
+        if (strlen($_POST["contrasena"]) ==0) {
             $err_pass = "*La contraseña es obligatoria";
         } else {
 
@@ -44,7 +49,7 @@
             } else if (!preg_match("/^[a-zA-Z 0-9]{0,255}$/", $temp_pass)) {
                 $err_pass = "*La contraseña solo puede contener mayusculas, minúsculas, ñ y números";
             } else {
-                $contraseña = $temp_pass;
+                $contrasena = $temp_pass;
             }
         }
         // Valido la edad
@@ -66,6 +71,10 @@
             }
         }
     }
+    $sql = "INSERT INTO usuarios (usuario, contraseña, fecha_nacimiento) VALUES ('$usuario', '$contrasena', '$edad')";
+    $conexion -> query($sql);
+
+    
     ?>
     <h2>Registrarse</h2>
     <form action="cesta.php" method="post"> <!-- preguntar si es correcto e laction -->
@@ -75,8 +84,8 @@
         <?php if (isset($err_usu)) echo $err_usu; ?>
         <br><br>
         <!-- maximo 255 char -->
-        <label id="contraseña"> Contraseña:</label>
-        <input type="text" name="contraseña"></input>
+        <label id="contrasena"> Contraseña:</label>
+        <input type="text" name="contrasena"></input>
         <?php if (isset($err_pass)) echo $err_pass; ?>
         <br><br>
         <label id="edad"> Fecha de nacimiento:</label>

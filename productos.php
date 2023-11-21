@@ -6,11 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Productos</title>
     <?php require "depurar.php" ?>
+    <?php require "conexion.php"?>
 </head>
 <!-- Falta la imagen -->
 
 <body>
     <?php
+$name="";
+$price = "";
+$descript = "";
+$quantity = "";
     if (
         $_SERVER["REQUEST_METHOD"] == "POST" &&
         $_POST["formulario"] == "insertar"
@@ -84,6 +89,9 @@
             }
         }
     }
+    $sql = "INSERT INTO Productos (nombre_producto, Precio, Descripción, Cantidad) VALUES ('$name', '$price', '$descript', '$quantity')";
+    $conexion -> query($sql);
+
     ?>
     <h2>Formulario de los productos</h2>
     <form action="" method="post">

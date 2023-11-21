@@ -18,8 +18,16 @@
         $_SESSION["usuario"] = "invitado";
         $usuario = $_SESSION["usuario"];
     }
-    
     ?>
+    <table>
+        <?php
+        for ($i=0; $i < ; $i++) { 
+            # code...
+        }
+        ?>
+    </table>
+
+
     <div class="container">
         <h1>Página principal</h1>
         <h2>Bienvenid@ <?php echo $usuario ?></h2>
