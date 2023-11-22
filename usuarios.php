@@ -11,11 +11,18 @@
 </head>
 
 <body>
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand" href="principal.php">Lista de productos</a>
+  <a class="navbar-brand" href="iniciar_sesion.php">Iniciar sesión</a>
+  <a class="navbar-brand" href="Micesta.php">Mi cesta</a>
+  <a class="navbar-brand" href="usuarios.php">Registrarse</a>
+</nav>
+    <div class="container">
+        <h1>Registrarse</h1>  
+    </div>
+
     <?php
 
-$usuario = "";
-$contrasena = "";
-$edad = "";
     if (
         $_SERVER["REQUEST_METHOD"] == "POST" &&
         $_POST["formulario"] == "insertar" //condicion para que cuando se pulse el boton con de insertar haga todas las validaciones siguientes
@@ -77,8 +84,7 @@ $edad = "";
     
     ?>
     <div class="container">
-    <h2>Registrarse</h2>
-    <form action="cesta.php" method="post"> <!-- preguntar si es correcto e laction -->
+    <form action="" method="post"> <!-- preguntar si es correcto e laction -->
         <!-- 4-12 char,acepta de a-z en min y mayusc, ñ, acentos y _ -->
         <label class="form-label" >Nombre de Usuario: </label>
         <input class="form-control" type="text" name="nameUsu"></input>
@@ -86,7 +92,7 @@ $edad = "";
         <br><br>
         <!-- maximo 255 char -->
         <label class="form-label" id="contrasena"> Contraseña:</label>
-        <input class="form-control" type="text" name="contrasena"></input>
+        <input class="form-control" type="password" name="contrasena"></input>
         <?php if (isset($err_pass)) echo $err_pass; ?>
         <br><br>
         <label class="form-label" id="edad"> Fecha de nacimiento:</label>
@@ -99,8 +105,10 @@ $edad = "";
     </form>
      <?php
      if(isset($usuario) && isset($contrasena) && isset($edad)) {
-        $sql = "INSERT INTO usuarios (usuario, contraseña, fecha_nacimiento) VALUES ('$usuario', '$contrasena', '$edad')";
-        $conexion -> query($sql);
+        $sql1 = "INSERT INTO usuarios (usuario, contraseña, fecha_nacimiento) VALUES ('$usuario', '$contrasena', '$edad')";
+        $conexion -> query($sql1);
+        $sql2 = "INSERT INTO cestas (usuario, precioTotal) VALUES ('$usuario','0')";
+        $conexion -> query($sql2);
      }
      ?>
      </div>

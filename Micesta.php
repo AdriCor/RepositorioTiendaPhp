@@ -24,26 +24,40 @@
 <nav class="navbar navbar-light bg-light">
   <a class="navbar-brand" href="principal.php">Lista de productos</a>
   <a class="navbar-brand" href="iniciar_sesion.php">Iniciar sesión</a>
-  <a class="navbar-brand" href="Micesta.php">Mi cesta</a>
+  <a class="navbar-brand" href="Micesta.php">Productos de mi cesta</a> <!--añadir aqui el total del precio de cesta-->
 </nav>
     <div class="container">
-        <h1>Mi cesta</h1>  <!-- mirar como meter aquí el usuario -->
+        <h1>Mi cesta</h1>  
     </div>
 
     <div>
         <table class="table table-striped table-hover">
             <thead class="table table-dark">
                 <tr>
-                    <th>ID</th>
                     <th>Nombre</th>
                     <th>Precio</th>
-                    <th>Descripción</th>
-                    <th>Stock</th>
+                    <th>cantidad</th>
                     <th>Imagen</th>
                 </tr>
             </thead>
             <tbody>
-                
+            <?php
+                $sql = "SELECT * FROM productoscestas";
+                $resultado = $conexion -> query($sql);
+
+                while($fila = $resultado -> fetch_assoc()) {
+                    echo "<tr>";
+                    echo "<td>" . $fila['nombre_producto'] . "</td>";
+                    echo "<td>" . $fila['Precio'] . "</td>";
+                    echo "<td>" . $fila['Cantidad'] . "</td>";
+                    echo "<td>"; 
+                    ?>
+                    <img witdh="50" height="100" src="<?php echo $fila["img"] ?>">
+                    <?php 
+                    echo "</td>";
+                    echo "</tr>";
+                }
+                ?>
             </tbody>
         </table>
         <a href="cerrarSesion.php">Cerrar sesión</a>

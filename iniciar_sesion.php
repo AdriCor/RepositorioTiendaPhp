@@ -13,7 +13,7 @@
 <nav class="navbar navbar-light bg-light">
   <a class="navbar-brand" href="principal.php">Lista de productos</a>
   <a class="navbar-brand" href="iniciar_sesion.php">Iniciar sesión</a>
-  <a class="navbar-brand" href="MiCesta.php">Mi cesta</a>
+  <a class="navbar-brand" href="MiCesta.php">Productos de mi cesta</a>
 </nav>
 
     <?php
@@ -21,7 +21,6 @@
         $usuario = $_POST["usuario"];
         $contrasena = $_POST["contrasena"];
 
-        $contrasena_cifrada = password_hash($contrasena, PASSWORD_DEFAULT);
 
         $sql = "SELECT * FROM usuarios WHERE usuario= '$usuario'";
         $resultado = $conexion->query($sql);
@@ -34,11 +33,12 @@
     <?php
         } else {
             while ($fila = $resultado->fetch_assoc()) {
-                $contrasena_cifrada = $fila["contrasena"];
+                $contrasena_cifrada = $fila["contraseña"];
             }
             $acceso_valido = password_verify($contrasena, $contrasena_cifrada);
-            if ($acceso_valido) {
+            if (!$acceso_valido) {
                 session_start();
+                $_SESSION["usuario"] = $usuario;
                 header("Location: principal.php");
             } else {
                 echo "La contraseña está mal";

@@ -13,10 +13,6 @@
 
 <body>
     <?php
-$name="";
-$price = "";
-$descript = "";
-$quantity = "";
     if (
         $_SERVER["REQUEST_METHOD"] == "POST" &&
         $_POST["formulario"] == "insertar"
@@ -25,6 +21,11 @@ $quantity = "";
         $temp_price = depurar($_POST["price"]);
         $temp_descrip = depurar($_POST["description"]);
         $temp_quantity = depurar($_POST["quantity"]);
+        
+        $nombre_imagen = $_FILES["img"]["name"];
+        $ruta_temporal = $_FILES["img"]["tmp_name"];
+        $ruta_final = "images/" . $nombre_imagen;
+        move_uploaded_file($ruta_temporal, $ruta_final);
 
         //  Valido el nombre del producto
         if (strlen($_POST["name"]) == 0) {
@@ -118,14 +119,18 @@ $quantity = "";
         <input class="form-control" type="text" name="quantity"></input>
         <?php if (isset($err_quantity)) echo $err_quantity; ?>
         <br><br>
+        <label class="form-label">Imagen</label>
+        <input class="form-control" type="file" name="img">
+        <br><br>
         <input type="hidden" name="formulario" value="insertar">
         <input class="btn btn-primary" type="submit" value="Insertar producto">
+        
     </form>
     </div>
     <?php
-     if(isset($name) && isset($price) && isset($descript) && isset($quantity)){
+     if(isset($name) && isset($price) && isset($descrip) && isset($quantity) && isset($ruta_final)){
         //aqui meto un if isset para comorobar que se haga una vez está todo declarado correctamente
-    $sql = "INSERT INTO Productos (nombre_producto, Precio, Descripción, Cantidad) VALUES ('$name', '$price', '$descript', '$quantity')";
+    $sql = "INSERT INTO Productos (nombre_producto, Precio, Descripción, Cantidad, img) VALUES ('$name', '$price', '$descrip', '$quantity', '$ruta_final')";
     $conexion -> query($sql);
      }
      ?>
