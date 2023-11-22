@@ -35,45 +35,58 @@
     </div>
 
 
-    <div>
-        <table class="table table-striped table-hover">
-            <thead class="table table-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Precio</th>
-                    <th>Descripción</th>
-                    <th>Stock</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $sql = "SELECT * FROM Productos";
-                $resultado = $conexion -> query($sql);
+    <?php
+    $sql = "SELECT * FROM productos";
+    $resultado = $conexion -> query($sql);
+    $productos = [];
 
-                while($fila = $resultado -> fetch_assoc()) {
-                    echo "<tr>";
-                    echo "<td>" . $fila['id_producto'] . "</td>";
-                    echo "<td>" . $fila['nombre_producto'] . "</td>";
-                    echo "<td>" . $fila['Precio'] . "</td>";
-                    echo "<td>" . $fila['Descripción'] . "</td>";
-                    echo "<td>" . $fila['Cantidad'] . "</td>";
-                    ?>
-                    <td>
+    while($fila = $resultado -> fetch_assoc()) {
+        $nuevo_producto = new Producto(
+            $fila["id_producto"],
+            $fila["nombre_producto"], 
+            $fila["Precio"], 
+            $fila["Descripción"],
+            $fila["Cantidad"],
+        );
+        array_push($productos, $nuevo_producto);
+    }
+    ?>
+    <div class="container">
+        <h1>Listado de películas</h1>
+
+        <div>
+            <table class="table table-striped table-hover">
+                <thead class="table table-dark">
+                    <tr>
+                        <th>ID Producto</th>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Descripcion</th>
+                        <th>Cantidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    foreach($productos as $producto) { ?>
+                        <tr>
+                            <td><?php echo $producto -> ID ?></td>
+                            <td><?php echo $producto -> NombreProd ?></td>
+                            <td><?php echo $producto -> Precio ?></td>
+                            <td><?php echo $producto -> Descripcion ?></td>
+                            <td><?php echo $producto -> Cantidad ?></td>
+                            <td>
                                 <form action="" method="post">
                                     <input type="hidden" 
-                                           name="productoCesta" 
-                                           value="">
+                                           name="id_pelicula" 
+                                           value="<?php echo $producto -> id_pelicula ?>">
                                     <input class="btn btn-warning" type="submit" value="Añadir">
                                 </form>
                             </td>
+                        </tr>
                     <?php
-                    echo "</tr>";
-                }
-                ?>
-            </tbody>
-            </tbody>
-        </table>
+                    } ?>
+                </tbody>
+            </table>
         <a href="cerrarSesion.php">Cerrar sesión</a>
     </div> 
                 </div>

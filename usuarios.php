@@ -100,7 +100,6 @@
         <?php if (isset($err_edad)) echo $err_edad; ?>
         <br><br>
         <input type="hidden" name="formulario" value="insertar">
-<!--Queda que cuando se inserte el usuario correctamente se cree una cesta con un precio total de 0, por ahora.-->
 <input class="btn btn-primary" type="submit" value="Registrarse">
     </form>
      <?php
