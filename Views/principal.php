@@ -47,6 +47,7 @@
             $fila["Precio"], 
             $fila["Descripción"],
             $fila["Cantidad"],
+            $fila["img"]
         );
         array_push($productos, $nuevo_producto);
     }
@@ -63,6 +64,7 @@
                         <th>Precio</th>
                         <th>Descripcion</th>
                         <th>Cantidad</th>
+                        <th>Imagen</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -74,11 +76,12 @@
                             <td><?php echo $producto -> Precio ?></td>
                             <td><?php echo $producto -> Descripcion ?></td>
                             <td><?php echo $producto -> Cantidad ?></td>
+                            <td><img witdh="50" height="100" src="<?php echo $producto->img ?>"></td>
                             <td>
                                 <form action="" method="post">
                                     <input type="hidden" 
                                            name="id_pelicula" 
-                                           value="<?php echo $producto -> id_pelicula ?>">
+                                           value="<?php echo $producto -> id_producto ?>">
                                     <input class="btn btn-warning" type="submit" value="Añadir">
                                 </form>
                             </td>
