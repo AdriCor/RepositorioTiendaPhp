@@ -97,8 +97,9 @@
             <a class="navbar-brand" href="principal.php">Inicio</a></li>
                 <?php
                 if (isset($_SESSION["rol"])) {
-                    if ($_SESSION["rol"] == "admin") {
-                        echo "<li><a href='creacion_productos.php'>Añadir Productos</a></li>";
+                    if ($_SESSION["rol"] == "admin") {?>
+                        <a class="navbar-brand" href="creacion_productos.php">Añadir Productos</a>
+                <?php
                     }
                 }
                 ?>

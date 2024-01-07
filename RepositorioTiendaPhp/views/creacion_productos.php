@@ -100,18 +100,16 @@
     ?>
     <div class=container>
         <h1>Insertar nuevos productos</h1>
-        <nav class="navigator">
-            <ul>
-                <li><a href="principal.php">Inicio</a></li>
-                <?php
-                if (!isset($_SESSION["usuario"])) {
-                    echo "<li><a href='../util/cerrarSesion.php'>Cerrar sesion</a></li>";
-                } else {
-                    echo "<li><a href='cesta.php'>Cesta</a></li>";
-                }
-                ?>
-
-            </ul>
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="principal.php">Inicio</a>
+            <?php
+            if (isset($_SESSION["usuario"])) {
+            ?>
+                <a class="navbar-brand" href="../util/cerrarSesion.php">Cerrar sesion</a>
+                <a class="navbar-brand" href="cesta.php">Cesta</a>
+            <?php
+            }
+            ?>
         </nav>
 
         <form action="" method="POST" class="mb-3" enctype="multipart/form-data">

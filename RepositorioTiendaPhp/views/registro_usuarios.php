@@ -75,7 +75,7 @@
     }
     ?>
     <div class="login">
-    <h2>Registrarse en AllMusic.com</h2>
+    <h2>Registro de sesión.</h2>
     <form action="" method="POST" class="mb-3">
         <div class="mb-3">
             <label for="user" class="form-label">Usuario</label>
@@ -107,7 +107,7 @@
         <input type="submit" class="btn btn-info" value="Registrarse">
         <?php if (isset($alert_exito))
             echo $alert_exito ?>
-            <p>Si te has registrado ya puedes loguearte <a href="./iniciar_sesion.php">aquí</a></p>
+            <p>Si ya te has registrado, puedes loguearte <a href="./iniciar_sesion.php">aquí</a></p>
         </form>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
