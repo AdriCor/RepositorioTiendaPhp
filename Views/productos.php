@@ -12,6 +12,8 @@
 <!-- Falta la imagen -->
 
 <body>
+
+
     <?php
     if (
         $_SERVER["REQUEST_METHOD"] == "POST" &&
@@ -22,10 +24,10 @@
         $temp_descrip = depurar($_POST["description"]);
         $temp_quantity = depurar($_POST["quantity"]);
         
-       /* $nombre_imagen = $_FILES["img"]["name"];
+        $nombre_imagen = $_FILES["img"]["name"];
         $ruta_temporal = $_FILES["img"]["tmp_name"];
-        $ruta_final = "Views/images/" . $nombre_imagen;
-        move_uploaded_file($ruta_temporal, $ruta_final); */
+        $ruta_final = "images/" . $nombre_imagen;
+        move_uploaded_file($ruta_temporal, $ruta_final); 
 
         //  Valido el nombre del producto
         if (strlen($_POST["name"]) == 0) {
@@ -98,7 +100,7 @@
     ?>
     <div class="container">
     <h2>Insertar productos</h2>
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         <!-- maximo 40 char,acepta de a-z en min y mayusc, ñ y acentos -->
         <label class="form-label" for="nameProduct">Nombre del Producto: </label>
         <input class="form-control" type="text" name="name"></input>
@@ -106,7 +108,7 @@
         <br><br>
         <!-- entre 1 y 9 -->
         <label class="form-label" for="price">Precio del Producto: </label>
-        <input class="form-control" type="number" name="price"></input>
+        <input class="form-control" type="text" name="price"></input>
         <?php if (isset($err_price)) echo $err_price; ?>
         <br><br>
         <!-- maximo 255 char -->
@@ -119,8 +121,8 @@
         <input class="form-control" type="text" name="quantity"></input>
         <?php if (isset($err_quantity)) echo $err_quantity; ?>
         <br><br>
-        <!-- <label class="form-label">Imagen</label> -->
-        <!-- <input class="form-control" type="file" name="img"> -->
+        <label class="form-label">Imagen</label> 
+        <input class="form-control" type="file" name="img"> 
         <br><br>
         <input type="hidden" name="formulario" value="insertar">
         <input class="btn btn-primary" type="submit" value="Insertar producto">
@@ -128,9 +130,9 @@
     </form>
     </div>
     <?php
-     if(isset($name) && isset($price) && isset($descrip) && isset($quantity)){
+     if(isset($name) && isset($price) && isset($descrip) && isset($quantity) && isset($ruta_final) ){
         //aqui meto un if isset para comorobar que se haga una vez está todo declarado correctamente
-    $sql = "INSERT INTO Productos (nombre_producto, Precio, Descripción, Cantidad) VALUES ('$name', '$price', '$descrip', '$quantity')";
+    $sql = "INSERT INTO Productos (nombre_producto, Precio, Descripción, Cantidad, img) VALUES ('$name', '$price', '$descrip', '$quantity', '$ruta_final')";
     $conexion -> query($sql);
 //    && isset($ruta_final) , img , '$ruta_final' retiro esto porque simplemente me da fallo, no bien implementado
 

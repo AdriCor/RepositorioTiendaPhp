@@ -9,12 +9,13 @@ class Producto{
     public string $Descripcion;
     public int $Cantidad;
     public string $img;
-    function __construct($ID,$NombreProd, $Precio, $Descripcion, $Cantidad) {
+    function __construct($ID,$NombreProd, $Precio, $Descripcion, $Cantidad, $img) {
         $this->ID = $ID;
         $this->NombreProd = $NombreProd;
         $this->Precio = $Precio;
         $this->Descripcion = $Descripcion;
         $this->Cantidad = $Cantidad;
+        $this->img = $img;
     }
 }
 ?>
